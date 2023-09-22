@@ -45,9 +45,13 @@ trainer = torch.optim.SGD(net.parameters(), lr=0.03)
 num_epochs = 3
 for epoch in range(num_epochs):
     for X, y in data_iter:
+        # 预测并计算损失（前向传播）
         l = loss(net(X), y)
+        # 梯度清零
         trainer.zero_grad()
+        # 反向传播
         l.backward()
+        # 调用优化器
         trainer.step()
     l = loss(net(features), labels)
     print(f'epoch {epoch + 1}, loss {l:f}')
